@@ -16,7 +16,9 @@ df <- df1 %>%
   left_join(df2) %>% 
   mutate(Incidence=`Incidence of malaria (per 1,000 population at risk) (per 1,000 population at risk)`) %>% 
   transmute(Entity,Year,age_group,deaths,Deaths100k,Incidence) %>% 
-  mutate(age_group=factor(age_group,levels = c("Under 5","5-14","15-49","50-69","70 or older")))
+  mutate(age_group=factor(age_group,levels = c("Under 5","5-14","15-49","50-69","70 or older"))) %>% 
+  group_by(Entity) %>% 
+  filter(!any(deaths==0))
 
 
 data_generation<-function(age,land,year1,year2){
@@ -27,24 +29,22 @@ data_generation<-function(age,land,year1,year2){
     filter(Year<=year2)
 }
 deathsplotter<-function(df5){
-  p<-list()
-  p[["deaths"]]<-ggplot(df5, aes(x=Year, fill = age_group, y = deaths)) +
+  ggplot(df5, aes(x=Year, fill = age_group, y = deaths)) +
     geom_density(alpha = 0.7, bw = .12, position = "stack",stat="identity") +
     scale_fill_brewer(palette = "Set2") +
     facet_grid(Entity ~ .)+
     labs(y="",yaxt="n",title="Total Deaths")+
-    theme(legend.position = "top")+
+    theme(legend.position = "top",axis.ticks.x=element_blank(),axis.ticks.y = element_blank(),
+          panel.background = element_rect(fill="white"))+
     scale_y_continuous(labels = unit_format(unit = "million",scale=1e-6))
-  
-  p[["deaths"]]
-  
 }
 
 bar<-function(df5){
   plot<-ggplot(df5,aes(Year,Deaths100k,fill=Entity))+
     geom_bar(position = position_dodge(),stat = "identity")+
     labs(y="",yaxt="n",title="Deaths per 100,000 People")+
-    theme(legend.position="top")
+    theme(legend.position = "top",axis.ticks.x=element_blank(),axis.ticks.y = element_blank(),
+          panel.background = element_rect(fill="white"))
   ggplotly(plot)
 }
 trends_table_fun<-function(df5){
