@@ -68,7 +68,7 @@ ui<-fluidPage(
   
   sidebarLayout(
     sidebarPanel(
-      helpText("Choose age groups, nations/regions, and years to explore malaria total deaths and death rate per 100,000 people. Also, look at the table to explore the p-value for the test of independence between age groups and years for total deaths:"),
+      helpText("Choose age groups, nations/regions, and years to explore total malaria deaths and death rate per 100,000 people. Also, look at the table to explore the p-value for the test of independence between age groups and years for total deaths:"),
       selectInput("age", label = "Age Group", choices = c("Under 5","5-14","15-49","50-69","70 or older"),multiple=T,selected=unique(df$age_group)),
       selectInput("land",label = "Country/Region", choices = unique(df$Entity),selected=c("Sub-Saharan Africa","South Asia"),multiple=T),
       sliderInput("Year",label = "Year", min=1990, max=2016, value=c(1990,2016))
