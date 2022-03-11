@@ -5,10 +5,9 @@ date: "3/10/2022"
 output: pdf_document
 ---
 
-How to run the app use this line:
+To run the app use this line:
 shiny::runGitHub(repo = "Matthewvoss8/stat479_Repo2MatthewVoss","rstudio")
-To see the code itself go to https://github.com/Matthewvoss8/stat479_Repo2MatthewVoss and look at the app.R file.
-Also, note you will need to have the ggridges library activated.
+To see the code itself go to https://github.com/Matthewvoss8/stat479_Repo2MatthewVoss and look at the app.R file. Also, someone told me you will need to have the ggridges library activated otherwise it will have a problem.
 
 
 Discussion: 
