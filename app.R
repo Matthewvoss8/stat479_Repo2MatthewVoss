@@ -48,19 +48,19 @@ bar<-function(df5){
   ggplotly(plot)
 }
 trends_table_fun<-function(df5){
-  something<-matrix(data = NA,nrow = length(unique(df5$Entity)),ncol=2)
+  tableout<-matrix(data = NA,nrow = length(unique(df5$Entity)),ncol=2)
   for(i in 1:length(unique(df5$Entity))){
-    something[i,1]=unique(df5$Entity)[i]
+    tableout[i,1]=unique(df5$Entity)[i]
     temp = df5 %>% 
       filter(Entity%in%unique(df5$Entity)[i]) %>% 
       mutate(age_group=as.character(age_group)) %>% 
       transmute(Year,age_group,deaths) %>% 
       xtabs(formula=deaths~age_group+Year)
-    something[i,2]=as.numeric(chisq.test(temp)[3])
+    tableout[i,2]=as.numeric(chisq.test(temp)[3])
   }
-  something<-as.data.frame(something)
-  colnames(something)<-c("Nation/Region","P-value of Deaths")
-  something 
+  tableout<-as.data.frame(tableout)
+  colnames(tableout)<-c("Nation/Region","P-value of Deaths")
+  tableout 
 }
 
 ui<-fluidPage(
