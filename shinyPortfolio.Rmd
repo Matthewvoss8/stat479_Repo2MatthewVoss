@@ -1,5 +1,5 @@
 ---
-title: "shinyPortfolio"
+title: "Malaria Project: Portfolio 2"
 author: "Matthew Voss"
 date: "3/10/2022"
 output: pdf_document
